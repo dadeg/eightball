@@ -71,10 +71,14 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
     dev.vm.provision :shell, path: 'vagrant-files/provision.sh'
 
-    # dev ip
-    dev.vm.network :private_network, ip: "192.168.22.110"
+    # dev ip setup
+    # use like localhost:4567
+    #dev.vm.network :forwarded_port, host: 4567, guest: 80
 
-    # hostmanager
+    # use like 192.168.50.4
+    dev.vm.network "private_network", ip: "192.168.50.4"
+
+    # hostmanager, use like custom-domain.dev
     dev.vm.hostname = "eightball.dev"
   end
 
@@ -141,5 +145,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # chef-validator, unless you changed the configuration.
   #
   #   chef.validation_client_name = "ORGNAME-validator"
-  config
 end
